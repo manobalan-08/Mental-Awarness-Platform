@@ -3,7 +3,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, Heart, MessageCircle, BarChart3, Zap,
-  LogOut, Brain, BookOpen, CheckSquare, Calendar, Users, Menu, X, Gamepad2
+  LogOut, Brain, BookOpen, CheckSquare, Calendar, Users, Menu, X, Gamepad2, Eye
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import FloatingAI from './FloatingAI';
@@ -18,6 +18,7 @@ const navItems = [
   { to: '/app/insights', icon: BarChart3,       label: 'Insights' },
   { to: '/app/tools',    icon: Zap,             label: 'Tools' },
   { to: '/app/games',    icon: Gamepad2,        label: 'Games' },
+  { to: '/app/eye-scanner', icon: Eye,             label: 'Eye Scanner' },
   { to: '/app/experts',  icon: Users,           label: 'Experts' },
 ];
 

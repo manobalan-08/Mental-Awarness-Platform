@@ -15,9 +15,10 @@ app.use('/api/insights',require('./routes/insights'));
 app.use('/api/chat',    require('./routes/chat'));
 app.use('/api/feedback',require('./routes/feedback'));
 app.use('/api/journal', require('./routes/journal'));
-app.use('/api/habits',  require('./routes/habits'));
-app.use('/api/plans',   require('./routes/plans'));
-app.use('/api/experts', require('./routes/experts'));
+app.use('/api/habits',    require('./routes/habits'));
+app.use('/api/plans',    require('./routes/plans'));
+app.use('/api/experts',  require('./routes/experts'));
+app.use('/api/eye-scan', require('./routes/eyeScan'));
 app.use('/api/games',   require('./routes/games'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
