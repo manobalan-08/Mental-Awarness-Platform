@@ -17,6 +17,7 @@ const db = {
   pollVotes: [],
   questCompletions: [],
   gameScores: [],
+  eyeScans: [],
 };
 
 // Seed demo experts

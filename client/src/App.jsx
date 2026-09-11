@@ -15,6 +15,9 @@ import WeeklyPlan from './pages/WeeklyPlan';
 import Experts from './pages/Experts';
 import Layout from './components/Layout';
 import Games from './pages/Games';
+import EyeScanner from './pages/EyeScanner';
+
+import EyeScanner from './pages/EyeScanner';
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -46,6 +49,8 @@ export default function App() {
             <Route path="plan" element={<WeeklyPlan />} />
             <Route path="experts" element={<Experts />} />
             <Route path="games" element={<Games />} />
+            <Route path="eye-scan" element={<EyeScanner />} />
+            <Route path="eye-scanner" element={<EyeScanner />} />
           </Route>
         </Routes>
       </BrowserRouter>
