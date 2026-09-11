@@ -8,9 +8,10 @@
  *  - Emits processed data to registered callbacks at ~30fps
  *
  * Privacy: All processing happens client-side. No frames leave the browser.
+ *
+ * NOTE: MediaPipe is imported dynamically inside initialize() to prevent
+ * top-level WASM failures from crashing the entire React module graph.
  */
-
-import { FaceLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
 
 // Eye landmark indices from the MediaPipe 478-point face mesh
 export const EYE_LANDMARKS = {
@@ -72,6 +73,10 @@ export default class EyeTrackingEngine {
    * Downloads the model (~5MB) on first load, cached thereafter
    */
   async initialize() {
+    // Dynamic import prevents WASM module from crashing the React module graph
+    // on page load if MediaPipe fails to initialize
+    const { FaceLandmarker, FilesetResolver } = await import('@mediapipe/tasks-vision');
+
     const vision = await FilesetResolver.forVisionTasks(
       'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm'
     );

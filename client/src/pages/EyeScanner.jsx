@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Eye, Camera, CameraOff, Save, RotateCcw, Info,
   ChevronDown, ChevronUp, Activity, Brain, Clock,
-  AlertTriangle, CheckCircle, ArrowRight, Zap,
+  AlertTriangle, CheckCircle, Zap,
 } from 'lucide-react';
 import api from '../utils/api';
 import toast from 'react-hot-toast';
@@ -11,12 +11,38 @@ import EyeTrackingEngine from '../utils/EyeTrackingEngine';
 import EmotionClassifier from '../utils/EmotionClassifier';
 import XAIEngine from '../utils/XAIEngine';
 
+// ── Error boundary — catches silent crashes so page is never blank ──
+import { Component } from 'react';
+class EyeScannerErrorBoundary extends Component {
+  constructor(props) { super(props); this.state = { error: null }; }
+  static getDerivedStateFromError(error) { return { error }; }
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="max-w-lg mx-auto mt-20 card border border-red-500/30 bg-red-500/10 space-y-3">
+          <div className="flex items-center gap-2 text-red-400 font-semibold">
+            <AlertTriangle size={18} /> Eye Scanner failed to load
+          </div>
+          <p className="text-sm text-red-300/80">{this.state.error?.message}</p>
+          <p className="text-xs text-slate-500">
+            This usually means the MediaPipe WASM model could not be fetched. Check your internet connection and try refreshing.
+          </p>
+          <button onClick={() => this.setState({ error: null })} className="btn-primary text-sm">
+            Try Again
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // ── Smoothing utility ──
 function exponentialMovingAvg(current, newVal, alpha = 0.3) {
   return current + alpha * (newVal - current);
 }
 
-export default function EyeScanner() {
+function EyeScannerInner() {
   // Refs
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -649,5 +675,13 @@ export default function EyeScanner() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function EyeScanner() {
+  return (
+    <EyeScannerErrorBoundary>
+      <EyeScannerInner />
+    </EyeScannerErrorBoundary>
   );
 }

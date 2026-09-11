@@ -18,7 +18,7 @@ const navItems = [
   { to: '/app/insights', icon: BarChart3,       label: 'Insights' },
   { to: '/app/tools',    icon: Zap,             label: 'Tools' },
   { to: '/app/games',    icon: Gamepad2,        label: 'Games' },
-  { to: '/app/eye-scanner', icon: Eye,             label: 'Eye Scanner' },
+  { to: '/app/eye-scan',    icon: Eye,             label: 'Eye Scanner' },
   { to: '/app/experts',  icon: Users,           label: 'Experts' },
 ];
 
